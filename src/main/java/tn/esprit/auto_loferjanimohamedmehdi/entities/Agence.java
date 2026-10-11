@@ -18,5 +18,9 @@ public class Agence {
     private String adresse;
     private String telephone;
 
+    @OneToMany(mappedBy = "agence", cascade = CascadeType.ALL)
+    private List<Employe> employes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "agence", cascade = CascadeType.ALL)
+    private List<Vehicule> vehicules = new ArrayList<>();
 }
