@@ -1,20 +1,35 @@
 package tn.esprit.auto_loferjanimohamedmehdi.Services;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.auto_loferjanimohamedmehdi.entities.Maintenance;
 import tn.esprit.auto_loferjanimohamedmehdi.repositories.MaintenanceRepository;
+
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class MaintenanceService implements IMaintenanceService {
 
-    private final MaintenanceRepository repo;
+    private MaintenanceRepository maintenanceRepo;
 
-    public Maintenance add(Maintenance m) { return repo.save(m); }
-    public List<Maintenance> getAll() { return repo.findAll(); }
-    public Maintenance getById(Long id) { return repo.findById(id).orElse(null); }
-    public Maintenance update(Maintenance m) { return repo.save(m); }
-    public void delete(Long id) { repo.deleteById(id); }
+    @Override
+    public Maintenance addMaintenance(Maintenance m) {
+        return maintenanceRepo.save(m);
+    }
+
+    @Override
+    public void deleteMaintenance(Long id) {
+        maintenanceRepo.deleteById(id);
+    }
+
+    @Override
+    public List<Maintenance> getAllMaintenances() {
+        return maintenanceRepo.findAll();
+    }
+
+    @Override
+    public Maintenance updateMaintenance(Maintenance maintenance) {
+        return maintenanceRepo.save(maintenance);
+    }
 }

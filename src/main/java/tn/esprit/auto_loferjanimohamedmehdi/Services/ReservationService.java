@@ -1,20 +1,35 @@
 package tn.esprit.auto_loferjanimohamedmehdi.Services;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.auto_loferjanimohamedmehdi.entities.Reservation;
 import tn.esprit.auto_loferjanimohamedmehdi.repositories.ReservationRepository;
+
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ReservationService implements IReservationService {
 
-    private final ReservationRepository repo;
+    private ReservationRepository reservationRepo;
 
-    public Reservation add(Reservation r) { return repo.save(r); }
-    public List<Reservation> getAll() { return repo.findAll(); }
-    public Reservation getById(Long id) { return repo.findById(id).orElse(null); }
-    public Reservation update(Reservation r) { return repo.save(r); }
-    public void delete(Long id) { repo.deleteById(id); }
+    @Override
+    public Reservation addReservation(Reservation r) {
+        return reservationRepo.save(r);
+    }
+
+    @Override
+    public void deleteReservation(Long id) {
+        reservationRepo.deleteById(id);
+    }
+
+    @Override
+    public List<Reservation> getAllReservations() {
+        return reservationRepo.findAll();
+    }
+
+    @Override
+    public Reservation updateReservation(Reservation reservation) {
+        return reservationRepo.save(reservation);
+    }
 }

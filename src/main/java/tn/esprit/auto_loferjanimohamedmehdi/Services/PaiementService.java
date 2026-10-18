@@ -1,20 +1,35 @@
 package tn.esprit.auto_loferjanimohamedmehdi.Services;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.auto_loferjanimohamedmehdi.entities.Paiement;
 import tn.esprit.auto_loferjanimohamedmehdi.repositories.PaimentRepository;
+
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class PaiementService implements IPaiementService {
 
-    private final PaimentRepository repo;
+    private PaimentRepository paiementRepo;
 
-    public Paiement add(Paiement p) { return repo.save(p); }
-    public List<Paiement> getAll() { return repo.findAll(); }
-    public Paiement getById(Long id) { return repo.findById(id).orElse(null); }
-    public Paiement update(Paiement p) { return repo.save(p); }
-    public void delete(Long id) { repo.deleteById(id); }
+    @Override
+    public Paiement addPaiement(Paiement p) {
+        return paiementRepo.save(p);
+    }
+
+    @Override
+    public void deletePaiement(Long id) {
+        paiementRepo.deleteById(id);
+    }
+
+    @Override
+    public List<Paiement> getAllPaiements() {
+        return paiementRepo.findAll();
+    }
+
+    @Override
+    public Paiement updatePaiement(Paiement paiement) {
+        return paiementRepo.save(paiement);
+    }
 }

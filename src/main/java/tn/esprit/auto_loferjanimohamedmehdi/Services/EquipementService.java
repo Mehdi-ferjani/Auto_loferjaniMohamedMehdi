@@ -1,20 +1,35 @@
 package tn.esprit.auto_loferjanimohamedmehdi.Services;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.auto_loferjanimohamedmehdi.entities.Equipement;
 import tn.esprit.auto_loferjanimohamedmehdi.repositories.EquipementRepository;
+
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class EquipementService implements IEquipementService {
 
-    private final EquipementRepository repo;
+    private EquipementRepository equipementRepo;
 
-    public Equipement add(Equipement e) { return repo.save(e); }
-    public List<Equipement> getAll() { return repo.findAll(); }
-    public Equipement getById(Long id) { return repo.findById(id).orElse(null); }
-    public Equipement update(Equipement e) { return repo.save(e); }
-    public void delete(Long id) { repo.deleteById(id); }
+    @Override
+    public Equipement addEquipement(Equipement e) {
+        return equipementRepo.save(e);
+    }
+
+    @Override
+    public void deleteEquipement(Long id) {
+        equipementRepo.deleteById(id);
+    }
+
+    @Override
+    public List<Equipement> getAllEquipements() {
+        return equipementRepo.findAll();
+    }
+
+    @Override
+    public Equipement updateEquipement(Equipement equipement) {
+        return equipementRepo.save(equipement);
+    }
 }

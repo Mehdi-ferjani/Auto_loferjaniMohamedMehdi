@@ -1,20 +1,35 @@
 package tn.esprit.auto_loferjanimohamedmehdi.Services;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.auto_loferjanimohamedmehdi.entities.Contrat;
 import tn.esprit.auto_loferjanimohamedmehdi.repositories.ContratRepository;
+
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ContratService implements IContratService {
 
-    private final ContratRepository repo;
+    private ContratRepository contratRepo;
 
-    public Contrat add(Contrat c) { return repo.save(c); }
-    public List<Contrat> getAll() { return repo.findAll(); }
-    public Contrat getById(Long id) { return repo.findById(id).orElse(null); }
-    public Contrat update(Contrat c) { return repo.save(c); }
-    public void delete(Long id) { repo.deleteById(id); }
+    @Override
+    public Contrat addContrat(Contrat c) {
+        return contratRepo.save(c);
+    }
+
+    @Override
+    public void deleteContrat(Long id) {
+        contratRepo.deleteById(id);
+    }
+
+    @Override
+    public List<Contrat> getAllContrats() {
+        return contratRepo.findAll();
+    }
+
+    @Override
+    public Contrat updateContrat(Contrat contrat) {
+        return contratRepo.save(contrat);
+    }
 }
